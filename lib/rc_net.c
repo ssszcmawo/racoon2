@@ -91,7 +91,6 @@ static struct rcs_addrmacro {
 	{ "MY_IPV4",			rcs_exmacro_my_ip_ipv4, },
 	{ "MY_HOA",			rcs_exmacro_my_ip_hoa, },
 	{ "IP_ANY",			rcs_exmacro_ip_unspecified, },
-	{ "IP_RW",			rcs_exmacro_ip_unspecified, },
 	{ "IP_UNSPECIFIED",		rcs_exmacro_ip_unspecified, },
 };
 
@@ -132,12 +131,6 @@ rcs_is_addr_name(struct rc_addrlist *al, const char *name)
 		return 0;
 
 	return 1;
-}
-
-int
-rcs_is_addr_rw(struct rc_addrlist *al)
-{
-	return rcs_is_addr_name(al, "IP_RW");
 }
 
 int

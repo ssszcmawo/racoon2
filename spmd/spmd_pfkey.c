@@ -277,8 +277,8 @@ spmd_pfkey_init(void)
 			rcals = sl->pl->my_sa_ipaddr;
 			rcald = sl->pl->peers_sa_ipaddr;
 
-			if (((rcals != NULL && rcs_is_addr_rw(rcals))
-			    || (rcald != NULL && rcs_is_addr_rw(rcald))) &&
+			if (((rcals != NULL && rcs_is_addr_any(rcals))
+			    || (rcald != NULL && rcs_is_addr_any(rcald))) &&
 				sl->pl->ipsec_mode == RCT_IPSM_TUNNEL)
 				spd_add_skip=1;
 		}
@@ -440,7 +440,7 @@ spmd_nonfqdn_sp_add(struct rcf_selector *sl)
 		else
 			al = pl->peers_sa_ipaddr;
 		switch (al->type) {
-		case RCT_ADDR_MACRO:  /* XXX IP_ANY */
+		case RCT_ADDR_MACRO:  /* IP_ANY macro */
 			if(rcs_getaddrlistbymacro(al->a.vstr, &ipal) != 0 || ipal == NULL)
 			{
 			    SPMD_PLOG(SPMD_L_INTERR,
@@ -475,7 +475,7 @@ spmd_nonfqdn_sp_add(struct rcf_selector *sl)
 		else
 			al = pl->peers_sa_ipaddr;
 		switch (al->type) {
-		case RCT_ADDR_MACRO: /* XXX IP_ANY */
+		case RCT_ADDR_MACRO: /* IP_ANY macro */
 			if(rcs_getaddrlistbymacro(al->a.vstr, &ipal) != 0 || ipal == NULL)
 			{
 			    SPMD_PLOG(SPMD_L_INTERR,
@@ -513,7 +513,7 @@ spmd_nonfqdn_sp_add(struct rcf_selector *sl)
 	al = sl->src; /* do we need to care multiple entries? - NO, but FQDN/MACRO OK*/
 	switch (al->type) {
 	case RCT_ADDR_MACRO:
-		if (rcs_is_addr_any(al) || rcs_is_addr_rw(al)) {
+		if (rcs_is_addr_any(al)) {
 			af = sl->dst->a.ipaddr->sa_family;
 		} else {
 			SPMD_PLOG(SPMD_L_INTERR,
@@ -567,7 +567,7 @@ spmd_nonfqdn_sp_add(struct rcf_selector *sl)
 	al = sl->dst; /* do we need to care multiple entries? - ditto */
 	switch (al->type) {
 	case RCT_ADDR_MACRO:
-		if (rcs_is_addr_any(al) || rcs_is_addr_rw(al)) {
+		if (rcs_is_addr_any(al)) {
 			af = sl->src->a.ipaddr->sa_family;
 		} else {
 			SPMD_PLOG(SPMD_L_INTERR,

@@ -160,9 +160,9 @@ ike_spmif_post_policy_add(struct rcf_selector *sel, rc_type samode,
 			continue;
 
 		if ((addrlist_equal(s->src, sel->dst) ||
-		     rcs_is_addr_rw(s->src) || rcs_is_addr_rw(sel->dst)) &&
+		     rcs_is_addr_any(s->src) || rcs_is_addr_any(sel->dst)) &&
 		    (addrlist_equal(s->dst, sel->src) ||
-		     rcs_is_addr_rw(s->dst) || rcs_is_addr_rw(sel->src))) {
+		     rcs_is_addr_any(s->dst) || rcs_is_addr_any(sel->src))) {
 			sl_index_in = s->sl_index;
 			break;
 		}

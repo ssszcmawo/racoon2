@@ -256,7 +256,7 @@ o Using policy generation functionality for IKEv2 (if necessary)
     remote remote-rw {
       acceptable_kmp { ikev2; };
       ikev2 {
-        peers_ipaddr IP_RW;
+        peers_ipaddr IP_ANY;
         ...
       };
     };
@@ -264,7 +264,7 @@ o Using policy generation functionality for IKEv2 (if necessary)
     policy policy-rw {
       action auto_ipsec;
       remote_index remote-rw;
-      peers_sa_ipaddr IP_RW;
+      peers_sa_ipaddr IP_ANY;
       ...
     };
 
