@@ -344,7 +344,7 @@ ikev2_destroy_child_sa(struct ikev2_child_sa *sa)
 				}
 			}
 		} else if (policy && policy->peers_sa_ipaddr &&
-			   rcs_is_addr_rw(policy->peers_sa_ipaddr)) {
+			   rcs_is_addr_any(policy->peers_sa_ipaddr)) {
 			if (selector && spmif_post_policy_delete(ike_spmif_socket(),
 						     NULL, NULL,
 						     selector->sl_index,
@@ -735,7 +735,7 @@ ikev2_create_child_responder(struct ikev2_sa *ike_sa,
 			}
 		}
 	} else if (!old_child_sa &&
-		   pol->peers_sa_ipaddr && rcs_is_addr_rw(pol->peers_sa_ipaddr)) {
+		   pol->peers_sa_ipaddr && rcs_is_addr_any(pol->peers_sa_ipaddr)) {
 		IPSEC_CONF(lifetime, pol->ips, ipsec_sa_lifetime_time, 0);
 		if (ike_spmif_post_policy_add(child_sa->selector,
 					      ike_ipsec_mode(pol), lifetime,

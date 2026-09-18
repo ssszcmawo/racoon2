@@ -126,8 +126,8 @@ o Representation of IP addresses
 		Note: IPv6 support is enabled by default. The INET6 build
 		option has been removed; IPv4 and IPv6 are always available.
 
-			IP_ANY, IP_RW, and IP_UNSPECIFIED are synonyms for an
-			unspecified/wildcard address (:: or 0.0.0.0). IP_RW can
+			IP_ANY and IP_UNSPECIFIED are synonyms for an
+			unspecified/wildcard address (:: or 0.0.0.0). IP_ANY can
 			be used in my_sa_ipaddr or peers_sa_ipaddr to generate
 			policies dynamically.
 
@@ -507,7 +507,7 @@ remote
 		It defines the IP addresses of the peer. The port number
 		may be specified if needed. It can be used as the first
 		search key to match with the IKE initial packet from
-		initiator. Omitting this field or writing it as IP_RW
+		initiator. Omitting this field or writing it as IP_ANY
 		requires default directive to handle IKE initial packets.
 
 	verify_id (on|off) ;
@@ -907,7 +907,7 @@ policy
 
 	peers_sa_ipaddr (address) ;
 		It defines an IP address of the end points of the SAs
-		on the peer's side. Write IP_RW in either my_sa_ipaddr
+		on the peer's side. Write IP_ANY in either my_sa_ipaddr
 		or peers_sa_ipaddr to generate policy dynamically for
 		tunnel mode.
 
