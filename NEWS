@@ -1,5 +1,45 @@
 $Id: NEWS,v 1.26 2010/05/07 19:08:25 kamada Exp $
 
+2026-09-18  ssszcmawo (GSOC 2026 work)
+
+	* iked: IKE fragmentation (RFC 7383) is now always enabled and
+	  the fragmentation configuration parameter was removed.  Fixed
+	  fragment reassembly to restore the original next payload type
+	  in the reassembled IKE header so the packet is recognized as
+	  encrypted, added checks for packets exceeding
+	  MAX_FRAGMENT_SIZE, and fixed a double free / SIGSEGV in
+	  ikev2_input
+	* iked/ikev1: NAT-T support per RFC 3947 in Quick Mode: NAT-OA
+	  payload structure now matches the RFC, NAT-OA payloads are
+	  constructed, sent and parsed positionally (NAT-OAi then
+	  NAT-OAr, tolerating a missing payload), and the NAT-OA data is
+	  passed to the kernel via PF_KEY
+	* iked: address substitution in NAT-T transport mode (RFC 7296
+	  2.23.1) for both IKEv2 and IKEv1: when traffic selector or ID
+	  payload addresses do not match the configuration selector's
+	  addresses because of NAT, they are substituted with the
+	  addresses observed on the wire; a second socket on port 4500
+	  is opened when NAT-T is enabled
+	* iked: IPv6 support is enabled by default; the "ipv6"
+	  configuration parameter was removed and prefixlen=0 handling
+	  for IPv6 was fixed
+	* iked: address macro handling improvements: IP_RW was renamed
+	  to IP_ANY (a synonym for IP_UNSPECIFIED) with proper wildcard
+	  address substitution in configurations, IP_ANY/IP_RW handling
+	  was added for IKEv2 configs and as a fallback in IKEv1 when
+	  slid is NULL; improved address macro handling and IPv6
+	  interface address validation on Linux, selector matching for
+	  prefixlen 0, and diagnostics for address lookup failures
+	* iked: transport mode now sets src/dst addresses correctly
+	  using my_sa_ipaddr and peers_sa_ipaddr instead of the generic
+	  SA endpoints, tunnel mode policies are generated from the
+	  configured SA tunnel endpoints, and the negotiated IPsec
+	  proposal is built from the peer's proposal
+	  (set_proposal_from_proposal)
+	* doc, samples: documentation and configuration samples were
+	  synced with the new defaults (IPv6, fragmentation, tunnel
+	  endpoints, IP_ANY)
+
 2020-02-05 Christos Zoulas, Chuck Zmudzinski
 
 	* begin testing racoon2 as L2TP/IPsec or IKEv2 VPN server on

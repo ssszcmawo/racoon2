@@ -416,7 +416,7 @@ o remote
 		peers_ipaddr (address) [port (port)];
 			相手のIPアドレスを設定する。IKEv2やIKEv1のmainモードで
 			responderの時のremoteの最初の検索キーになる。省略時や
-			IP_RWと書く場合にはdefaultディレクティブが必要。複数可。
+			IP_ANYと書く場合にはdefaultディレクティブが必要。複数可。
 
 		verify_id (on|off) ;
 		verify_pubkey (on|off) ;
@@ -608,7 +608,7 @@ o policy
 	peers_sa_ipaddr (address) ;
 		SAの終端IPアドレスを定義する。IPアドレス,FQDN,マクロが書ける。
 		actionが static_ipsecの場合、または tunnelモードを使う場合は
-		定義する。peers_sa_ipaddrをIP_RWと書くと、generate policyする。
+		定義する。peers_sa_ipaddrをIP_ANYと書くと、generate policyする。
 
 	ipsec_level (unique|require|use) ;
 		use
